@@ -1,0 +1,313 @@
+#include <stdio.h>
+#include <stdbool.h>
+#include <math.h>  // Necessário para as funções trigonométricas e pow
+#include <locale.h> //Melhorar acentuação
+
+int opcao = 0;
+float a, b, c, k, x, fx;
+float resultado = 0;
+float limite_max = 100.0;
+float limite_min = -100.0;
+const float PI = 3.14159265359;
+
+float calcular_funcao_linear(float a, float b, float x);
+float calcular_funcao_quadratica(float a, float b, float c, float x);
+float calcular_exponencial(float k, float x);
+float calcular_logaritmo(float k, float x);
+float calcular_seno(float x);
+float calcular_cosseno(float x);
+float calcular_tangente(float x);
+bool entrada_valida(float *valor);
+bool verifica_limite(float valor, float limite_min, float limite_max);
+float graus_para_radianos(float graus);
+void exibir_resultado(const char* funcao, float resultado);
+
+int main(void) {
+    setlocale(LC_ALL, "");
+    while(opcao != 8){
+        printf("\n ==============Menu==============\n");
+        printf("\n1- f(x) = a*x + b");
+        printf("\n2- f(x) = a*x^2 + b*x + c");
+        printf("\n3- f(x) = k^x");
+        printf("\n4- f(x) = log_k(x)");
+        printf("\n5- f(x) = sin(x)");
+        printf("\n6- f(x) = cos(x)");
+        printf("\n7- f(x) = tan(x)");
+        printf("\n8- Sair;\n");
+        printf("\nSua Escolha: ");
+        scanf("%d", &opcao);
+        while (getchar() != '\n'); // Limpa o buffer
+
+        switch(opcao){
+            case 1:
+                printf("\n---------f(x) = a*x + b---------\n");
+                // Pedindo os valores e validando como já foi feito antes
+                do {
+                    printf("Digite o valor de a (entre %.2f e %.2f): ", limite_min, limite_max);
+                    while (!entrada_valida(&a)) {
+                        printf("Entrada inválida. Digite um número válido para a: ");
+                    }
+                } while (!verifica_limite(a, limite_min, limite_max));
+
+                do {
+                    printf("Digite o valor de b (entre %.2f e %.2f): ", limite_min, limite_max);
+                    while (!entrada_valida(&b)) {
+                        printf("Entrada inválida. Digite um número válido para b: ");
+                    }
+                } while (!verifica_limite(b, limite_min, limite_max));
+
+                do {
+                    printf("Digite o valor de x (entre %.2f e %.2f): ", limite_min, limite_max);
+                    while (!entrada_valida(&x)) {
+                        printf("Entrada inválida. Digite um número válido para x: ");
+                    }
+                } while (!verifica_limite(x, limite_min, limite_max));
+
+                resultado = calcular_funcao_linear(a, b, x);
+                exibir_resultado("f(x) = a*x + b", resultado);
+                if (a > 0) {
+                    printf("A função é crescente.\n");
+                } else if (a < 0) {
+                    printf("A função é decrescente.\n");
+                } else {
+                    printf("A função é constante.\n");
+                }
+                if (a != 0) {
+                    float zero_da_funcao = -b / a;
+                    printf("O zero da função é x = %.8f\n", zero_da_funcao);
+                } else {
+                    printf("Não há zero da função, pois a = 0.\n");
+                }
+                printf("\n ");
+                break;
+
+            case 2:
+                printf("\n---------f(x) = a*x^2 + b*x + c---------\n");
+
+                do {
+                    printf("Digite o valor de a (entre %.2f e %.2f): ", limite_min, limite_max);
+                    while (!entrada_valida(&a)) {
+                        printf("Entrada inválida. Digite um número válido para a: ");
+                    }
+                } while (!verifica_limite(a, limite_min, limite_max));
+
+                do {
+                    printf("Digite o valor de b (entre %.2f e %.2f): ", limite_min, limite_max);
+                    while (!entrada_valida(&b)) {
+                        printf("Entrada inválida. Digite um número válido para b: ");
+                    }
+                } while (!verifica_limite(b, limite_min, limite_max));
+
+                do {
+                    printf("Digite o valor de c (entre %.2f e %.2f): ", limite_min, limite_max);
+                    while (!entrada_valida(&c)) {
+                        printf("Entrada inválida. Digite um número válido para c: ");
+                    }
+                } while (!verifica_limite(c, limite_min, limite_max));
+
+                do {
+                    printf("Digite o valor de x (entre %.2f e %.2f): ", limite_min, limite_max);
+                    while (!entrada_valida(&x)) {
+                        printf("Entrada inválida. Digite um número válido para x: ");
+                    }
+                } while (!verifica_limite(x, limite_min, limite_max));
+
+                resultado = calcular_funcao_quadratica(a, b, c, x);
+                exibir_resultado("f(x) = a*x^2 + b*x + c", resultado);
+                if (a > 0) {
+                    printf("\nA função é côncava para cima.\n");
+                } else if (a < 0) {
+                    printf("\nA função é côncava para baixo.\n");
+                } else {
+                    printf("\nA função não é uma parábola (a = 0).\n");
+                }
+
+                // Cálculo dos vértices Xv e Yv
+                if (a != 0) {
+                    float xv = -b / (2 * a);  // Cálculo de Xv
+                    float delta = (b * b) - (4 * a * c);  // Cálculo do discriminante (Delta)
+                    float yv = -delta / (4 * a);  // Cálculo de Yv
+
+                    printf("O vértice da função é: Xv = %.8f, Yv = %.8f\n", xv, yv);
+
+                    // Cálculo das raízes x1 e x2 (zeros da função)
+                    if (delta > 0) {
+                        float x1 = (-b + sqrt(delta)) / (2 * a);
+                        float x2 = (-b - sqrt(delta)) / (2 * a);
+                        printf("As raízes da função são: x1 = %.8f, x2 = %.8f\n", x1, x2);
+                    } else if (delta == 0) {
+                        float x1 = -b / (2 * a);  // Quando delta é 0, as raízes são iguais
+                        printf("A função tem uma raiz real: x1 = %.8f\n", x1);
+                    } else {
+                        printf("A função não tem raízes reais (Delta < 0).\n");
+                    }
+                } else {
+                    printf("A função não é uma parábola, pois a = 0.\n");
+                }
+                printf("\n ");
+                break;
+
+            case 3:
+                printf("\n---------f(x) = k^x---------\n");
+
+                do {
+                    printf("Digite o valor de k (entre %.2f e %.2f): ", limite_min, limite_max);
+                    while (!entrada_valida(&k)) {
+                        printf("Entrada inválida. Digite um número válido para k: ");
+                    }
+                } while (!verifica_limite(k, limite_min, limite_max));
+
+                do {
+                    printf("Digite o valor de x (entre %.2f e %.2f): ", limite_min, limite_max);
+                    while (!entrada_valida(&x)) {
+                        printf("Entrada inválida. Digite um número válido para x: ");
+                    }
+                } while (!verifica_limite(x, limite_min, limite_max));
+
+                if (k > 1) {
+                    printf("\nA função é crescente.\n");
+                } else if (k > 0 && k < 1) {
+                    printf("\nA função é decrescente.\n");
+                } else if (k == 1) {
+                    printf("\nA função é constante.\n");
+                } else {
+                    printf("\nValor inválido para k. k deve ser maior que 0.\n");
+                }
+                resultado = calcular_exponencial(k, x);
+                exibir_resultado("f(x) = k^x", resultado);
+                printf("\n ");
+                break;
+
+            case 4:
+                printf("\n---------f(x) = log_k(x)---------\n");
+
+                do {
+                    printf("Digite o valor de k (entre %.2f e %.2f): ", limite_min, limite_max);
+                    while (!entrada_valida(&k)) {
+                        printf("Entrada inválida. Digite um número válido para k: ");
+                    }
+                } while (!verifica_limite(k, limite_min, limite_max));
+
+                do {
+                    printf("Digite o valor de x (entre %.2f e %.2f): ", limite_min, limite_max);
+                    while (!entrada_valida(&x)) {
+                        printf("Entrada inválida. Digite um número válido para x: ");
+                    }
+                } while (!verifica_limite(x, limite_min, limite_max));
+
+                if (k > 1) {
+                    printf("\nA função é crescente.\n");
+                } else if (k < 1 && k > 0) {
+                    printf("\nA função é decrescente.\n");
+                } else {
+                    printf("\nValor inválido para k. k deve ser maior que 0 e diferente de 1.\n");
+                }
+                if (k > 0 && x > 0) {
+                    resultado = calcular_logaritmo(k, x);
+                    exibir_resultado("f(x) = log_k(x)", resultado);
+                } else {
+                    printf("Valor inválido. k e x devem ser maiores que 0.\n");
+                }
+                printf("\n ");
+                break;
+
+            case 5:
+                printf("\n---------f(x) = sin(x)---------\n");
+
+                do {
+                    printf("Digite o valor de x (em graus, entre %.2f e %.2f): ", limite_min, limite_max);
+                    while (!entrada_valida(&x)) {
+                        printf("Entrada inválida. Digite um número válido para x: ");
+                    }
+                } while (!verifica_limite(x, limite_min, limite_max));
+
+                resultado = calcular_seno(graus_para_radianos(x));
+                exibir_resultado("f(x) = sin(x)", resultado);
+                printf("\n ");
+                break;
+
+            case 6:
+                printf("\n---------f(x) = cos(x)---------\n");
+
+                do {
+                    printf("Digite o valor de x (em graus, entre %.2f e %.2f): ", limite_min, limite_max);
+                    while (!entrada_valida(&x)) {
+                        printf("Entrada inválida. Digite um número válido para x: ");
+                    }
+                } while (!verifica_limite(x, limite_min, limite_max));
+
+                resultado = calcular_cosseno(graus_para_radianos(x));
+                exibir_resultado("f(x) = cos(x)", resultado);
+                printf("\n ");
+                break;
+
+            case 7:
+                printf("\n---------f(x) = tan(x)---------\n");
+
+                do {
+                    printf("Digite o valor de x (em graus, entre %.2f e %.2f): ", limite_min, limite_max);
+                    while (!entrada_valida(&x)) {
+                        printf("Entrada inválida. Digite um número válido para x: ");
+                    }
+                } while (!verifica_limite(x, limite_min, limite_max));
+
+                resultado = calcular_tangente(graus_para_radianos(x));
+                exibir_resultado("f(x) = tan(x)", resultado);
+                printf("\n ");
+                break;
+
+            case 8:
+                printf("Saindo...\n");
+                break;
+
+            default:
+                printf("Opção inválida! Tente novamente.\n");
+                break;
+        }
+    }
+    return 0;
+}
+
+float calcular_funcao_linear(float a, float b, float x) {
+    return (a * x) + b;
+}
+
+float calcular_funcao_quadratica(float a, float b, float c, float x) {
+    return (a * pow(x, 2)) + (b * x) + c;
+}
+
+float calcular_exponencial(float k, float x) {
+    return pow(k, x);
+}
+
+float calcular_logaritmo(float k, float x) {
+    return log(x) / log(k);  // Mudança de base
+}
+
+float calcular_seno(float x) {
+    return sin(x);
+}
+
+float calcular_cosseno(float x) {
+    return cos(x);
+}
+
+float calcular_tangente(float x) {
+    return tan(x);
+}
+
+bool entrada_valida(float *valor) {
+    return scanf("%f", valor) == 1;  // Retorna verdadeiro se a leitura foi bem-sucedida
+}
+
+bool verifica_limite(float valor, float limite_min, float limite_max) {
+    return valor >= limite_min && valor <= limite_max;  // Retorna verdadeiro se o valor estiver dentro dos limites
+}
+
+float graus_para_radianos(float graus) {
+    return graus * (PI / 180.0);  // Converte graus para radianos
+}
+
+void exibir_resultado(const char* funcao, float resultado) {
+    printf("Resultado da função %s: %.8f\n", funcao, resultado);
+}
