@@ -1,8 +1,4 @@
-//
-// Created by Manara on 28/09/2024.
-//
+/**
+ *Local para armazenar a documentacao das funcoes.
+ */
 
-#ifndef FUNCOES_H
-#define FUNCOES_H
-
-#endif //FUNCOES_H

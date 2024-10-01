@@ -1,4 +1,4 @@
-# Install script for directory: H:/ACADEMIC/CODES/C/Materia_Calculo/Atv2_funcoesV2
+# Install script for directory: H:/APRENDENDO A CODAR/Calculo_1/Atv2_funcoesV2
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -45,5 +45,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "H:/ACADEMIC/CODES/C/Materia_Calculo/Atv2_funcoesV2/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "H:/APRENDENDO A CODAR/Calculo_1/Atv2_funcoesV2/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

@@ -11,7 +11,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "H:/ACADEMIC/CODES/C/Materia_Calculo/Atv2_funcoesV2/cmake-build-debug"
+			"value" : "H:/APRENDENDO A CODAR/Calculo_1/Atv2_funcoesV2/cmake-build-debug"
 		},
 		{
 			"name" : "Atv2_funcoesV2_IS_TOP_LEVEL",
@@ -35,7 +35,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "H:/ACADEMIC/CODES/C/Materia_Calculo/Atv2_funcoesV2"
+			"value" : "H:/APRENDENDO A CODAR/Calculo_1/Atv2_funcoesV2"
 		},
 		{
 			"name" : "CMAKE_ADDR2LINE",
@@ -91,7 +91,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "h:/ACADEMIC/CODES/C/Materia_Calculo/Atv2_funcoesV2/cmake-build-debug"
+			"value" : "h:/APRENDENDO A CODAR/Calculo_1/Atv2_funcoesV2/cmake-build-debug"
 		},
 		{
 			"name" : "CMAKE_CACHE_MAJOR_VERSION",
@@ -467,7 +467,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "H:/ACADEMIC/CODES/C/Materia_Calculo/Atv2_funcoesV2/cmake-build-debug/CMakeFiles/pkgRedirects"
+			"value" : "H:/APRENDENDO A CODAR/Calculo_1/Atv2_funcoesV2/cmake-build-debug/CMakeFiles/pkgRedirects"
 		},
 		{
 			"name" : "CMAKE_GENERATOR",
@@ -539,7 +539,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "H:/ACADEMIC/CODES/C/Materia_Calculo/Atv2_funcoesV2"
+			"value" : "H:/APRENDENDO A CODAR/Calculo_1/Atv2_funcoesV2"
 		},
 		{
 			"name" : "CMAKE_INSTALL_PREFIX",

@@ -1,3 +1,8 @@
 # ninja log v6
 31	183	7492334153087256	CMakeFiles/Atv2_funcoesV2.dir/main.c.obj	c3c8cef46d6de7ff
 183	341	7492334154616110	Atv2_funcoesV2.exe	86c946633b05d0b8
+374	585	7494451636414154	CMakeFiles/Atv2_funcoesV2.dir/main.c.obj	5e65685c57ef0880
+11	144	7494453412924380	CMakeFiles/Atv2_funcoesV2.dir/funcoes.c.obj	659aec4252ffd5c5
+11	153	7494453960944107	CMakeFiles/Atv2_funcoesV2.dir/main.c.obj	5e65685c57ef0880
+9	133	7494455168807081	CMakeFiles/Atv2_funcoesV2.dir/funcoes.c.obj	659aec4252ffd5c5
+133	272	7494455170057410	Atv2_funcoesV2.exe	ebceae362d761b5f
