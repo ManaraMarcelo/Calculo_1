@@ -1,10 +1,8 @@
 #include "funcoes.h"
 #include <stdio.h>
-#include "funcoes.h"
 #include <stdbool.h>
 #include <math.h>
 
-extern int opcao;
 extern double a, b, c, k, x, fx, resultado;
 extern double limite_max, limite_min;
 extern const double PI;

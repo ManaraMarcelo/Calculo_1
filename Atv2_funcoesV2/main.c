@@ -37,7 +37,7 @@ int main(void) {
         printf("\n8- Sair;\n");
         printf("\nSua Escolha: ");
         scanf("%d", &opcao);
-        while (getchar() != '\n'); // Limpa o buffer
+        while (getchar() != '\n');
 
         switch(opcao){
             case 1:
